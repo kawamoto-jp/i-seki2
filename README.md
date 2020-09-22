@@ -1,24 +1,101 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| nickname           | string  | null: false |
+| sex_id             | integer | null: false |
+| email              | string  | null: false |
+| password           | string  | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_one  :user_info
 
-* Configuration
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## user_infos テーブル
 
-* Deployment instructions
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| people_num       | integer    | null: false                    |
+| area_id          | integer    | null: false                    |
+| text             | text       | null: false                    |
+| user             | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :user
+- has_many :rooms, through: room_user_infos
+- has_many :messages
+- has_many :relationship
+
+
+
+
+
+## relationships テーブル
+
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| following_id | references | null: false, foreign_key: true |
+| follower_id  | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user_info
+- has_one    :rooms
+
+
+
+
+
+##  rooms テーブル
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| name           | string     | null: false                    |
+| relationship   | references | null: false, foreign_key: true |
+
+### Association
+
+- has_many   :room_users
+- has_many   :user_infos, through: room_user_infos
+- has_many   :messages
+- belongs_to :relationships
+
+
+
+
+
+##  messages テーブル
+
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| content    | string     |                                |
+| user       | references | null: false, foreign_key: true |
+| room       | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :room
+- belongs_to :user
+
+
+
+
+
+## room_users テーブル
+
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| user_infos   | references | null: false, foreign_key: true |
+| room         | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :room
+- belongs_to :user
