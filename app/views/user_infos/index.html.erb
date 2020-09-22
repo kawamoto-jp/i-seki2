@@ -4,6 +4,7 @@
     <%= link_to current_user.email , edit_user_path(current_user) %>さん、まいど！
     <li>ログイン</li>
     <li>新規登録</li>
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn'%>
   </ul>
 </header>
 
