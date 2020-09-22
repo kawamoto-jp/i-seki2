@@ -4,8 +4,6 @@
 
 | Column             | Type    | Options     |
 | ------------------ | ------- | ----------- |
-| nickname           | string  | null: false |
-| sex_id             | integer | null: false |
 | email              | string  | null: false |
 | password           | string  | null: false |
 
@@ -21,6 +19,8 @@
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
+| nickname         | string     | null: false                    |
+| sex_id           | integer    | null: false                    |
 | people_num       | integer    | null: false                    |
 | area_id          | integer    | null: false                    |
 | text             | text       | null: false                    |
